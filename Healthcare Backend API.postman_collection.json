@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "5b242ade-768c-4fc3-be91-48a9bf949827",
+		"name": "Healthcare Backend API",
+		"description": "API collection for testing the healthcare backend system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39689165"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"newuser2025\",\n    \"email\": \"newuser2025@example.com\",\n    \"password\": \"securepassword123\",\n    \"first_name\": \"New\",\n    \"last_name\": \"User\"\n}"
+						},
+						"url": "{{base_url}}/api/auth/register/",
+						"description": "Register a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"newuser2025\",\n    \"password\": \"securepassword123\"\n}"
+						},
+						"url": "{{base_url}}/api/auth/login/",
+						"description": "Login a user and get JWT tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}"
+						},
+						"url": "{{base_url}}/api/auth/refresh/",
+						"description": "Refresh the access token using the refresh token"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "Create Patient",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Robert\",\n    \"last_name\": \"Smith\",\n    \"date_of_birth\": \"1985-03-15\",\n    \"gender\": \"M\",\n    \"blood_group\": \"B+\",\n    \"phone_number\": \"5556667777\",\n    \"address\": \"456 Oak St, Newtown\",\n    \"medical_history\": \"Seasonal allergies, mild asthma\"\n}"
+						},
+						"url": "{{base_url}}/api/patients/",
+						"description": "Create a new patient record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": "{{base_url}}/api/patients/",
+						"description": "Get all patients for the authenticated user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": "{{base_url}}/api/patients/1/",
+						"description": "Get a specific patient by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patient",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Robert\",\n    \"last_name\": \"Smith\",\n    \"date_of_birth\": \"1985-03-15\",\n    \"gender\": \"M\",\n    \"blood_group\": \"B+\",\n    \"phone_number\": \"5556667788\",\n    \"address\": \"789 Pine Lane, Newtown\",\n    \"medical_history\": \"Seasonal allergies, mild asthma, recent appendectomy\"\n}"
+						},
+						"url": "{{base_url}}/api/patients/1/",
+						"description": "Update a patient record"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Patient",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": "{{base_url}}/api/patients/1/",
+						"description": "Delete a patient record"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctors",
+			"item": [
+				{
+					"name": "Create Doctor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Michael\",\n    \"last_name\": \"Chen\",\n    \"specialty\": \"Internal Medicine\",\n    \"license_number\": \"MED54321\",\n    \"phone_number\": \"7778889999\",\n    \"email\": \"michael.chen@example.com\",\n    \"address\": \"456 Medical Plaza, Healthville\",\n    \"years_of_experience\": 8\n}"
+						},
+						"url": "{{base_url}}/api/doctors/",
+						"description": "Create a new doctor record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Doctors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": "{{base_url}}/api/doctors/",
+						"description": "Get all doctors"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": "{{base_url}}/api/doctors/1/",
+						"description": "Get a specific doctor by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Michael\",\n    \"last_name\": \"Chen\",\n    \"specialty\": \"Pulmonology\",\n    \"license_number\": \"MED54321\",\n    \"phone_number\": \"7778889999\",\n    \"email\": \"michael.chen@example.com\",\n    \"address\": \"555 Research Blvd, Healthville\",\n    \"years_of_experience\": 10\n}"
+						},
+						"url": "{{base_url}}/api/doctors/1/",
+						"description": "Update a doctor record"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Doctor",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": "{{base_url}}/api/doctors/1/",
+						"description": "Delete a doctor record"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mappings",
+			"item": [
+				{
+					"name": "Create Mapping",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"patient\": 1,\n    \"doctor\": 1\n}"
+						},
+						"url": "{{base_url}}/api/mappings/",
+						"description": "Assign a doctor to a patient"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Mappings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": "{{base_url}}/api/mappings/",
+						"description": "Get all patient-doctor mappings"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctors for Patient",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": "{{base_url}}/api/mappings/patient/1/",
+						"description": "Get all doctors assigned to a specific patient"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Mapping",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": "{{base_url}}/api/mappings/1/",
+						"description": "Remove a doctor from a patient"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Automatically capture and store tokens from login response",
+					"if (pm.info.requestName === \"Login User\" && pm.response.code === 200) {",
+					"    var jsonData = pm.response.json();",
+					"    pm.environment.set(\"access_token\", jsonData.access);",
+					"    pm.environment.set(\"refresh_token\", jsonData.refresh);",
+					"    console.log(\"Tokens saved to environment variables\");",
+					"}",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
