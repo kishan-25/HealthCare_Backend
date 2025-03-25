@@ -8,7 +8,9 @@ class PatientViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     
     def get_queryset(self):
+        # Ensure users can only see their own patients
         return Patient.objects.filter(user=self.request.user)
     
     def perform_create(self, serializer):
+        # Automatically associate the patient with the current user
         serializer.save(user=self.request.user)

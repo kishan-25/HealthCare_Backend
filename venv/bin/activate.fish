@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/balkishan/Desktop/healthcare_backend/venv"
+set -gx VIRTUAL_ENV "/home/balkishan/Desktop/HealthCare_Backend/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
